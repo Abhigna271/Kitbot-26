@@ -197,6 +197,13 @@ public final class Constants {
     public static final double kSimMOI = .005;
     public static final double kSimGearing = 16.0/32.0;
   }
+public static final class ShooterConstants{
+    public static final double kGearRatio = 10/82;
+    //sim
+    public static final DCMotor kSimGearbox = DCMotor.getKrakenX60(01);
+    public static final double kSimMOI = .005;
+    public static final double kSimGearing = 10/82;
+}
 
   public static final class AprilTagVisionConstants {
     public static final LoggedTunableNumber kUseVision = new LoggedTunableNumber("Use Vision", 1);
