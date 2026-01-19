@@ -190,11 +190,12 @@ public final class Constants {
     public static final LoggedTunableNumber kIdleVoltage =
         new LoggedTunableNumber("Intake/idleVoltage", 0.0);
 
-    public static final double kGearRatio = 24.0 / 56.0;
+    public static final double kGearRatio = 16.0 / 32.0;
 
     // sim
     public static final DCMotor kSimGearbox = DCMotor.getKrakenX60(1);
     public static final double kSimMOI = .005;
+    public static final double kSimGearing = 16.0/32.0;
   }
 
   public static final class AprilTagVisionConstants {
