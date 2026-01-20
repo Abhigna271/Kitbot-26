@@ -86,6 +86,14 @@ public class IntakeIOKraken implements IntakeIO {
                 m_motorTemperature));
         }
     }
-    
+@Override
+public void updateInputs(IntakeInputs inputs) {}
 
+@Override
+    public void setVoltage(double volt) {
+}
+
+@Override
+ public void setCurrentLimits(double supplyLimit) {  
+ }
 }
