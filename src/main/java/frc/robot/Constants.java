@@ -293,6 +293,10 @@ public static final class ShooterConstants{
     // Intake
     public static final double kIntakeDefaultSupplyLimit = 30.0;
     public static final double kIntakeDefaultStatorLimit = 120.0;
+
+    //Shooter
+    public static final double kShooterDefaultSupplyLimit = 30.0;
+    public static final double kShooterDefaultStatorLimit = 120.0;
   }
 
   public static final class Ports {
