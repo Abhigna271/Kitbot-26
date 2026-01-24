@@ -1,5 +1,12 @@
 package frc.robot.subsystems.intake;
 
+import static edu.wpi.first.units.Units.Amp;
+import static edu.wpi.first.units.Units.Amps;
+import static edu.wpi.first.units.Units.Celsius;
+import static edu.wpi.first.units.Units.RotationsPerSecond;
+import static edu.wpi.first.units.Units.Volt;
+import static edu.wpi.first.units.Units.Volts;
+
 import java.util.List;
 import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.StatusSignal;
@@ -64,6 +71,7 @@ public class IntakeIOKraken implements IntakeIO {
     m_motorStatorCurrent = m_motor.getStatorCurrent();
     m_motorVoltage = m_motor.getMotorVoltage();
     m_motorTemperature = m_motor.getDeviceTemp();
+
 //Sets amount of times for update, but doesn't actually do it
     BaseStatusSignal.setUpdateFrequencyForAll(
     75.0,
@@ -73,6 +81,7 @@ public class IntakeIOKraken implements IntakeIO {
     m_motorStatorCurrent,
     m_motorVoltage,
     m_motorTemperature);
+
 //What gets updated, not actually updating anything
     if (Constants.kUseBaseRefreshManager) {
         CtreBaseRefreshManager.addSignals(
@@ -85,6 +94,8 @@ public class IntakeIOKraken implements IntakeIO {
                 m_motorTemperature));
         }
     }
+
+    //Actually refreshes inputs
 @Override
 public void updateInputs(IntakeInputs inputs) {
     if (!Constants.kUseBaseRefreshManager) {
@@ -94,19 +105,31 @@ public void updateInputs(IntakeInputs inputs) {
              m_motorVelocity,
              m_motorCurrent,
              m_motorStatorCurrent,
-             m_motorVelocity,
+             m_motorVoltage,
              m_motorTemperature)
              .isOK();
-
     }
+
+    //Setting the values and units
+    inputs.motorIsConnected = m_connectedMotor.getValue() != ConnectedMotorValue.Unknown;
+    inputs.velocityRPS = m_motorVelocity.getValue().in(RotationsPerSecond);
+    inputs.current = m_motorCurrent.getValue().in(Amps);
+    inputs.statorCurrent = m_motorStatorCurrent.getValue().in(Amps);
+    inputs.voltage = m_motorVoltage.getValue().in(Volts);
+    inputs.temperature = m_motorTemperature.getValue().in(Celsius);
+
 }
     
 @Override
     public void setVoltage(double volt) {
+        m_motor.setControl(m_voltageOut.withOutput(volt));
 }
 
 @Override
  public void setCurrentLimits(double supplyLimit) {  
+    m_motor
+    .getConfigurator()
+    .apply(m_config.CurrentLimits.withSupplyCurrentLimit(supplyLimit), 0.0);
  }
 }
 
