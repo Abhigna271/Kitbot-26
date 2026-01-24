@@ -1,7 +1,6 @@
 package frc.robot.subsystems.intake;
 
 import java.util.List;
-
 import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
@@ -45,7 +44,7 @@ public class IntakeIOKraken implements IntakeIO {
     .withSupplyCurrentLimit(CurrentLimitConstants.kIntakeDefaultSupplyLimit)
     .withStatorCurrentLimitEnable(true)
     .withStatorCurrentLimit(CurrentLimitConstants.kIntakeDefaultStatorLimit);
-
+//ASK ABOUT THIS 
     var feedbackConfig =
         new FeedbackConfigs().withSensorToMechanismRatio(IntakeConstants.kGearRatio);
 
@@ -56,16 +55,16 @@ public class IntakeIOKraken implements IntakeIO {
         .withCurrentLimits(currentLimits)
         .withFeedback(feedbackConfig)
         .withMotorOutput(motorOutput);
-
+//Configurater is used to change settings
     m_motor.getConfigurator().apply(m_config);
-
+//Gets all of the different variables
     m_connectedMotor = m_motor.getConnectedMotor();
     m_motorVelocity = m_motor.getVelocity();
     m_motorCurrent = m_motor.getSupplyCurrent();
     m_motorStatorCurrent = m_motor.getStatorCurrent();
     m_motorVoltage = m_motor.getMotorVoltage();
     m_motorTemperature = m_motor.getDeviceTemp();
-
+//Sets amount of times for update, but doesn't actually do it
     BaseStatusSignal.setUpdateFrequencyForAll(
     75.0,
      m_connectedMotor,
@@ -74,7 +73,7 @@ public class IntakeIOKraken implements IntakeIO {
     m_motorStatorCurrent,
     m_motorVoltage,
     m_motorTemperature);
-
+//What gets updated, not actually updating anything
     if (Constants.kUseBaseRefreshManager) {
         CtreBaseRefreshManager.addSignals(
             List.of(
@@ -87,8 +86,21 @@ public class IntakeIOKraken implements IntakeIO {
         }
     }
 @Override
-public void updateInputs(IntakeInputs inputs) {}
+public void updateInputs(IntakeInputs inputs) {
+    if (!Constants.kUseBaseRefreshManager) {
+        BaseStatusSignal.refreshAll(
+            null,
+             m_connectedMotor,
+             m_motorVelocity,
+             m_motorCurrent,
+             m_motorStatorCurrent,
+             m_motorVelocity,
+             m_motorTemperature)
+             .isOK();
 
+    }
+}
+    
 @Override
     public void setVoltage(double volt) {
 }
@@ -97,3 +109,5 @@ public void updateInputs(IntakeInputs inputs) {}
  public void setCurrentLimits(double supplyLimit) {  
  }
 }
+
+
