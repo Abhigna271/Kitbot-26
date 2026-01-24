@@ -1,10 +1,8 @@
 package frc.robot.subsystems.intake;
 
-import static edu.wpi.first.units.Units.Amp;
 import static edu.wpi.first.units.Units.Amps;
 import static edu.wpi.first.units.Units.Celsius;
 import static edu.wpi.first.units.Units.RotationsPerSecond;
-import static edu.wpi.first.units.Units.Volt;
 import static edu.wpi.first.units.Units.Volts;
 
 import java.util.List;
@@ -26,8 +24,9 @@ import edu.wpi.first.units.measure.Voltage;
 import frc.robot.Constants;
 import frc.robot.Constants.CurrentLimitConstants;
 import frc.robot.Constants.IntakeConstants;
-import frc.util.CtreBaseRefreshManager;
+import frc.robot.util.CtreBaseRefreshManager;
 
+//Contains general hardware, motor, statussignals, etc
 public class IntakeIOKraken implements IntakeIO {
     private TalonFX m_motor;
     
@@ -38,13 +37,19 @@ public class IntakeIOKraken implements IntakeIO {
     private StatusSignal<Current> m_motorStatorCurrent;
     private StatusSignal<Temperature> m_motorTemperature;
 
+    //constructor for motor
     private final TalonFXConfiguration m_config; 
 
+    /*creates a new voltage output to track
+    FOC controls torque*/
     private VoltageOut m_voltageOut = new VoltageOut(0.0).withEnableFOC(true);
 
+        //port is the slot the Canbus(canivore/wire) is connected to
     public IntakeIOKraken(int Port, String Bus){
+        //initializing motor
         m_motor = new TalonFX(Port, Bus);
 
+        //object that stores all of the limits for the motor
     var currentLimits =
     new CurrentLimitsConfigs()
     .withSupplyCurrentLimitEnable(true)
@@ -54,16 +59,19 @@ public class IntakeIOKraken implements IntakeIO {
 //ASK ABOUT THIS 
     var feedbackConfig =
         new FeedbackConfigs().withSensorToMechanismRatio(IntakeConstants.kGearRatio);
-
+//setting the motor usage to 0 when power is not being added (brakes if control is alone)
     var motorOutput = new MotorOutputConfigs().withNeutralMode(NeutralModeValue.Brake);
 
+    //setting the new motor as m_config and setting limits, rotation feedback, and motor output
     m_config =
         new TalonFXConfiguration()
         .withCurrentLimits(currentLimits)
         .withFeedback(feedbackConfig)
         .withMotorOutput(motorOutput);
+
 //Configurater is used to change settings
     m_motor.getConfigurator().apply(m_config);
+
 //Gets all of the different variables
     m_connectedMotor = m_motor.getConnectedMotor();
     m_motorVelocity = m_motor.getVelocity();
@@ -84,7 +92,7 @@ public class IntakeIOKraken implements IntakeIO {
 
 //What gets updated, not actually updating anything
     if (Constants.kUseBaseRefreshManager) {
-        CtreBaseRefreshManager.addSignals(
+        frc.util.CtreBaseRefreshManager.addSignals(
             List.of(
                 m_connectedMotor,
                 m_motorVelocity,
@@ -119,12 +127,13 @@ public void updateInputs(IntakeInputs inputs) {
     inputs.temperature = m_motorTemperature.getValue().in(Celsius);
 
 }
-    
+    //adds an amount of voltage to motor at a moment
 @Override
     public void setVoltage(double volt) {
         m_motor.setControl(m_voltageOut.withOutput(volt));
 }
 
+//add the current limits etc to the motor "m_config"
 @Override
  public void setCurrentLimits(double supplyLimit) {  
     m_motor
