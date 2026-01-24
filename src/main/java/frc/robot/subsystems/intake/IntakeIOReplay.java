@@ -1,5 +1,3 @@
 package frc.robot.subsystems.intake;
 
-public class IntakeIOReplay {
-    
-}
+public class IntakeIOReplay {}

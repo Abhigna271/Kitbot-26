@@ -1,6 +1,6 @@
 package frc.robot;
 
-import frc.robot.util.SubsystemProfiles;
+import frc.util.SubsystemProfiles;
 import java.util.HashMap;
 import org.littletonrobotics.junction.Logger;
 
@@ -16,7 +16,7 @@ public class RobotState {
   private static RobotState m_instance;
 
   public RobotState() {
-  
+
     HashMap<RobotAction, Runnable> hash = new HashMap<>();
     hash.put(RobotAction.kAutoDefault, () -> {});
     hash.put(RobotAction.kTeleopDefault, () -> {});
@@ -34,18 +34,14 @@ public class RobotState {
 
     switch (action) {
       case kAutoDefault:
-        
         break;
       case kTeleopDefault:
-       
         break;
       case kIntaking:
-        
         break;
       default:
         break;
     }
-
 
     m_profiles.setCurrentProfile(action);
   }

@@ -195,15 +195,16 @@ public final class Constants {
     // sim
     public static final DCMotor kSimGearbox = DCMotor.getKrakenX60(1);
     public static final double kSimMOI = .005;
-    public static final double kSimGearing = 16.0/32.0;
+    public static final double kSimGearing = 16.0 / 32.0;
   }
-public static final class ShooterConstants{
-    public static final double kGearRatio = 10/82;
-    //sim
+
+  public static final class ShooterConstants {
+    public static final double kGearRatio = 10 / 82;
+    // sim
     public static final DCMotor kSimGearbox = DCMotor.getKrakenX60(01);
     public static final double kSimMOI = .005;
-    public static final double kSimGearing = 10/82;
-}
+    public static final double kSimGearing = 10 / 82;
+  }
 
   public static final class AprilTagVisionConstants {
     public static final LoggedTunableNumber kUseVision = new LoggedTunableNumber("Use Vision", 1);
@@ -294,7 +295,7 @@ public static final class ShooterConstants{
     public static final double kIntakeDefaultSupplyLimit = 30.0;
     public static final double kIntakeDefaultStatorLimit = 120.0;
 
-    //Shooter
+    // Shooter
     public static final double kShooterDefaultSupplyLimit = 30.0;
     public static final double kShooterDefaultStatorLimit = 120.0;
   }

@@ -1,10 +1,7 @@
 package frc.robot;
 
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import frc.robot.Constants.Ports;
 import frc.robot.RobotState.RobotAction;
 import frc.robot.oi.DriverControls;
 import frc.robot.oi.DriverControlsPS5;
@@ -25,12 +22,9 @@ public class RobotContainer {
     configureBindings();
   }
 
-  public void configureSubsystems() {
+  public void configureSubsystems() {}
 
-  }
-
-  public void configureCommands() {
-  }
+  public void configureCommands() {}
 
   public void configureControllers() {
     m_controller = new DriverControlsPS5(0);
@@ -42,8 +36,8 @@ public class RobotContainer {
         .onTrue(
             Commands.runOnce(
                 (() -> {
-                  if(RobotState.getInstance().getCurrAction() != RobotAction.kIntaking) {
-                  RobotState.getInstance().updateRobotAction(RobotAction.kIntaking);
+                  if (RobotState.getInstance().getCurrAction() != RobotAction.kIntaking) {
+                    RobotState.getInstance().updateRobotAction(RobotAction.kIntaking);
                   } else {
                     RobotState.getInstance().updateRobotAction(RobotAction.kTeleopDefault);
                   }
