@@ -92,7 +92,7 @@ public class IntakeIOKraken implements IntakeIO {
 
 //What gets updated, not actually updating anything
     if (Constants.kUseBaseRefreshManager) {
-        frc.util.CtreBaseRefreshManager.addSignals(
+        CtreBaseRefreshManager.addSignals(
             List.of(
                 m_connectedMotor,
                 m_motorVelocity,
