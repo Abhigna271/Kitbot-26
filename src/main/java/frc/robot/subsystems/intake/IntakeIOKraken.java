@@ -6,6 +6,7 @@ import static edu.wpi.first.units.Units.RotationsPerSecond;
 import static edu.wpi.first.units.Units.Volts;
 
 import java.util.List;
+
 import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
@@ -24,7 +25,6 @@ import edu.wpi.first.units.measure.Voltage;
 import frc.robot.Constants;
 import frc.robot.Constants.CurrentLimitConstants;
 import frc.robot.Constants.IntakeConstants;
-import frc.robot.util.CtreBaseRefreshManager;
 
 //Contains general hardware, motor, statussignals, etc
 public class IntakeIOKraken implements IntakeIO {
@@ -92,7 +92,7 @@ public class IntakeIOKraken implements IntakeIO {
 
 //What gets updated, not actually updating anything
     if (Constants.kUseBaseRefreshManager) {
-        CtreBaseRefreshManager.addSignals(
+        frc.util.CtreBaseRefreshManager.addSignals(
             List.of(
                 m_connectedMotor,
                 m_motorVelocity,
