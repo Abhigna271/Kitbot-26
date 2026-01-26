@@ -1,8 +1,9 @@
 package frc.robot;
 
-import frc.util.SubsystemProfiles;
 import java.util.HashMap;
 import org.littletonrobotics.junction.Logger;
+
+import frc.robot.util.SubsystemProfiles;
 
 public class RobotState {
 

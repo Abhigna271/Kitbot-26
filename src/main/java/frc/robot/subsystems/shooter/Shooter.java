@@ -12,7 +12,7 @@ public class Shooter extends SubsystemBase {
     private ShooterIO m_io;
     public final ShooterInputsAutoLogged m_inputs = new ShooterInputsAutoLogged();
 
-    private frc.util.SubsystemProfiles<ShooterState> m_profiles;
+    private frc.robot.util.SubsystemProfiles<ShooterState> m_profiles;
 
     public static enum ShooterState {
         kIdle,
@@ -25,7 +25,7 @@ public class Shooter extends SubsystemBase {
         periodicHash.put(ShooterState.kIdle, this::idlePeriodic);
         periodicHash.put(ShooterState.kSpinning, this::spinningPeriodic);
 
-        m_profiles = new frc.util.SubsystemProfiles<>(periodicHash, ShooterState.kIdle);
+        m_profiles = new frc.robot.util.SubsystemProfiles<>(periodicHash, ShooterState.kIdle);
     }
 
     @Override

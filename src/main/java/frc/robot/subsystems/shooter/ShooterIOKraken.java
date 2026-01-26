@@ -17,7 +17,7 @@ import edu.wpi.first.units.measure.Voltage;
 import frc.robot.Constants;
 import frc.robot.Constants.CurrentLimitConstants;
 import frc.robot.Constants.ShooterConstants;
-import frc.util.CtreBaseRefreshManager;
+import frc.robot.util.CtreBaseRefreshManager;
 
 import static edu.wpi.first.units.Units.Amps;
 import static edu.wpi.first.units.Units.Celsius;
