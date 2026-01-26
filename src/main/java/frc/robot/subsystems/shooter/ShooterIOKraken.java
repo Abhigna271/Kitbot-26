@@ -22,7 +22,14 @@ import edu.wpi.first.units.measure.Voltage;
 import frc.robot.Constants;
 import frc.robot.Constants.CurrentLimitConstants;
 import frc.robot.Constants.ShooterConstants;
-import frc.util.CtreBaseRefreshManager;
+import frc.robot.util.CtreBaseRefreshManager;
+
+import static edu.wpi.first.units.Units.Amps;
+import static edu.wpi.first.units.Units.Celsius;
+import static edu.wpi.first.units.Units.RotationsPerSecond;
+import static edu.wpi.first.units.Units.Volt;
+import static edu.wpi.first.units.Units.Volts;
+
 import java.util.List;
 
 public class ShooterIOKraken implements ShooterIO {

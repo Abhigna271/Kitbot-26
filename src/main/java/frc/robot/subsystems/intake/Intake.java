@@ -10,7 +10,7 @@ public class Intake extends SubsystemBase {
   private IntakeIO m_Io;
   public final IntakeInputsAutoLogged m_inputs = new IntakeInputsAutoLogged();
 
-  private frc.util.SubsystemProfiles<IntakeState> m_Profiles;
+    private frc.robot.util.SubsystemProfiles<IntakeState> m_Profiles;
 
   public static enum IntakeState {
     kIdle,
@@ -23,9 +23,8 @@ public class Intake extends SubsystemBase {
     periodicHash.put(IntakeState.kIdle, this::idlePeriodic);
     periodicHash.put(IntakeState.kSpinning, this::spinningPeriodic);
 
-    m_Profiles =
-        new frc.util.SubsystemProfiles<Intake.IntakeState>(periodicHash, IntakeState.kIdle);
-  }
+        m_Profiles = new frc.util.SubsystemProfiles<Intake.IntakeState>(periodicHash, IntakeState.kIdle);
+    }
 
   @Override
   public void periodic() {

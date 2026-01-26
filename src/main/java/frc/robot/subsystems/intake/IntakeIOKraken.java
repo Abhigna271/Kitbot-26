@@ -90,16 +90,16 @@ public class IntakeIOKraken implements IntakeIO {
 
     // What gets updated, not actually updating anything
     if (Constants.kUseBaseRefreshManager) {
-      frc.util.CtreBaseRefreshManager.addSignals(
-          List.of(
-              m_connectedMotor,
-              m_motorVelocity,
-              m_motorCurrent,
-              m_motorStatorCurrent,
-              m_motorVoltage,
-              m_motorTemperature));
+        frc.robot.util.CtreBaseRefreshManager.addSignals(
+            List.of(
+                m_connectedMotor,
+                m_motorVelocity,
+                m_motorCurrent,
+                m_motorStatorCurrent,
+                m_motorVoltage,
+                m_motorTemperature));
+        }
     }
-  }
 
   // Actually refreshes inputs
   @Override
