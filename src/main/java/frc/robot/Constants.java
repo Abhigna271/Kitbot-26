@@ -209,7 +209,7 @@ public final class Constants {
     // sim
     public static final DCMotor kSimGearbox = DCMotor.getKrakenX60(01);
     public static final double kSimMOI = .005;
-    public static final double kSimGearing = 10 / 82;
+    public static final double kSimGearing = 2;
   }
 
   public static final class AprilTagVisionConstants {
