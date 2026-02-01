@@ -22,6 +22,8 @@ import edu.wpi.first.units.measure.Voltage;
 import frc.robot.Constants;
 import frc.robot.Constants.CurrentLimitConstants;
 import frc.robot.Constants.IntakeConstants;
+import frc.robot.util.CtreBaseRefreshManager;
+
 import java.util.List;
 
 // Contains general hardware, motor, statussignals, etc
@@ -35,14 +37,14 @@ public class IntakeIOKraken implements IntakeIO {
   private StatusSignal<Current> m_motorStatorCurrent;
   private StatusSignal<Temperature> m_motorTemperature;
 
-  // constructor for motor
+  // instance variable
   private final TalonFXConfiguration m_config;
 
   /*creates a new voltage output to track
   FOC controls torque*/
   private VoltageOut m_voltageOut = new VoltageOut(0.0).withEnableFOC(true);
 
-  // port is the slot the Canbus(canivore/wire) is connected to
+  // constructor
   public IntakeIOKraken(int Port, String Bus) {
     // initializing motor
     m_motor = new TalonFX(Port, Bus);
@@ -54,7 +56,7 @@ public class IntakeIOKraken implements IntakeIO {
             .withSupplyCurrentLimit(CurrentLimitConstants.kIntakeDefaultSupplyLimit)
             .withStatorCurrentLimitEnable(true)
             .withStatorCurrentLimit(CurrentLimitConstants.kIntakeDefaultStatorLimit);
-    // ASK ABOUT THIS
+    // Assign gear ratio
     var feedbackConfig =
         new FeedbackConfigs().withSensorToMechanismRatio(IntakeConstants.kGearRatio);
     // setting the motor usage to 0 when power is not being added (brakes if control is alone)
@@ -90,14 +92,15 @@ public class IntakeIOKraken implements IntakeIO {
 
     // What gets updated, not actually updating anything
     if (Constants.kUseBaseRefreshManager) {
-        frc.robot.util.CtreBaseRefreshManager.addSignals(
-            List.of(
+        CtreBaseRefreshManager.addSignals(
+          List.of(
                 m_connectedMotor,
                 m_motorVelocity,
                 m_motorCurrent,
                 m_motorStatorCurrent,
                 m_motorVoltage,
-                m_motorTemperature));
+                m_motorTemperature
+        ));
         }
     }
 
