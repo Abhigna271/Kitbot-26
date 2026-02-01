@@ -63,17 +63,7 @@ public class RobotContainer {
                     m_intake.updateState(Intake.IntakeState.kSpinning);
                   }
                 })));
-    m_controller
-        .intake()
-        .onTrue(
-            Commands.runOnce(
-                (() -> {
-                  if (RobotState.getInstance().getCurrAction() != RobotAction.kIntaking) {
-                    RobotState.getInstance().updateRobotAction(RobotAction.kIntaking);
-                  } else {
-                    RobotState.getInstance().updateRobotAction(RobotAction.kTeleopDefault);
-                  }
-                })));
+
 
     m_controller
         .shooter()
