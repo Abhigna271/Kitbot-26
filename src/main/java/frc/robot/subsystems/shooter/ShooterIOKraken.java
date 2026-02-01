@@ -23,8 +23,6 @@ import frc.robot.Constants;
 import frc.robot.Constants.CurrentLimitConstants;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.util.CtreBaseRefreshManager;
-
-
 import java.util.List;
 
 public class ShooterIOKraken implements ShooterIO {

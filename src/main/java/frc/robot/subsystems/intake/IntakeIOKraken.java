@@ -23,7 +23,6 @@ import frc.robot.Constants;
 import frc.robot.Constants.CurrentLimitConstants;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.util.CtreBaseRefreshManager;
-
 import java.util.List;
 
 // Contains general hardware, motor, statussignals, etc
@@ -92,17 +91,16 @@ public class IntakeIOKraken implements IntakeIO {
 
     // What gets updated, not actually updating anything
     if (Constants.kUseBaseRefreshManager) {
-        CtreBaseRefreshManager.addSignals(
+      CtreBaseRefreshManager.addSignals(
           List.of(
-                m_connectedMotor,
-                m_motorVelocity,
-                m_motorCurrent,
-                m_motorStatorCurrent,
-                m_motorVoltage,
-                m_motorTemperature
-        ));
-        }
+              m_connectedMotor,
+              m_motorVelocity,
+              m_motorCurrent,
+              m_motorStatorCurrent,
+              m_motorVoltage,
+              m_motorTemperature));
     }
+  }
 
   // Actually refreshes inputs
   @Override

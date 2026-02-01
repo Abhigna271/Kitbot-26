@@ -7,14 +7,18 @@ import frc.robot.Constants.Ports;
 import frc.robot.RobotState.RobotAction;
 import frc.robot.oi.DriverControls;
 import frc.robot.oi.DriverControlsPS5;
+import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.intake.IntakeIOKraken;
+import frc.robot.subsystems.intake.IntakeIOSim;
 import frc.robot.subsystems.shooter.Shooter;
+import frc.robot.subsystems.shooter.Shooter.ShooterState;
 import frc.robot.subsystems.shooter.ShooterIOKraken;
 import frc.robot.subsystems.shooter.ShooterIOSim;
-import frc.robot.subsystems.shooter.Shooter.ShooterState;
-
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 public class RobotContainer {
+
+  private Intake m_intake;
 
   private Shooter m_shooter;
   // Controller
@@ -31,15 +35,12 @@ public class RobotContainer {
   }
 
   public void configureSubsystems() {
-    
-    
-    
-    
-    
-    
+
     if (RobotBase.isReal()) {
-      m_shooter = new Shooter(new ShooterIOKraken(Ports.kShooter, Ports.kMainCanivoreName));
+      m_intake = new Intake(new IntakeIOKraken(Ports.kIntake, Ports.kIntakeCanivoreName));
+      m_shooter = new Shooter(new ShooterIOKraken(Ports.kShooter, Ports.kShooterCanivoreName));
     } else {
+      m_intake = new Intake(new IntakeIOSim());
       m_shooter = new Shooter(new ShooterIOSim());
     }
   }
@@ -56,6 +57,17 @@ public class RobotContainer {
         .onTrue(
             Commands.runOnce(
                 (() -> {
+                  if (m_intake.getCurrentState() != Intake.IntakeState.kIdle) {
+                    m_intake.updateState(Intake.IntakeState.kIdle);
+                  } else {
+                    m_intake.updateState(Intake.IntakeState.kSpinning);
+                  }
+                })));
+    m_controller
+        .intake()
+        .onTrue(
+            Commands.runOnce(
+                (() -> {
                   if (RobotState.getInstance().getCurrAction() != RobotAction.kIntaking) {
                     RobotState.getInstance().updateRobotAction(RobotAction.kIntaking);
                   } else {
@@ -66,16 +78,18 @@ public class RobotContainer {
     m_controller
         .shooter()
         .onTrue(
-          Commands.runOnce(() -> {
-              m_shooter.updateState(ShooterState.kSpinning);
-          }));
+            Commands.runOnce(
+                () -> {
+                  m_shooter.updateState(ShooterState.kSpinning);
+                }));
 
     m_controller
-          .shooter()
-          .onFalse(
-            Commands.runOnce(() ->{
-              m_shooter.updateState(ShooterState.kIdle);
-            }));
+        .shooter()
+        .onFalse(
+            Commands.runOnce(
+                () -> {
+                  m_shooter.updateState(ShooterState.kIdle);
+                }));
   }
 
   public Command getAutonomousCommand() {
