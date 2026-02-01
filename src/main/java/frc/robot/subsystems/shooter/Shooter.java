@@ -43,6 +43,10 @@ public class Shooter extends SubsystemBase {
     m_io.setVoltage(ShooterConstants.kSpinningVoltage.get());
   }
 
+  public void updateState(ShooterState state) {
+    m_profiles.setCurrentProfile(state);
+  }
+
   public ShooterState getCurrentState() {
     return m_profiles.getCurrentProfile();
   }

@@ -326,6 +326,7 @@ public final class Constants {
     public static final String kDriveCanivoreName = "Drivetrain";
 
     public static final int kIntake = 12;
+    public static final int kShooter = 12;
 
     public static final String kMainCanivoreName = "Main";
   }
