@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.Constants.Ports;
-import frc.robot.RobotState.RobotAction;
 import frc.robot.oi.DriverControls;
 import frc.robot.oi.DriverControlsPS5;
 import frc.robot.subsystems.intake.Intake;
@@ -56,14 +55,13 @@ public class RobotContainer {
         .intake()
         .onTrue(
             Commands.runOnce(
-                (() -> {
+                () -> {
                   if (m_intake.getCurrentState() != Intake.IntakeState.kIdle) {
                     m_intake.updateState(Intake.IntakeState.kIdle);
                   } else {
                     m_intake.updateState(Intake.IntakeState.kSpinning);
                   }
-                })));
-
+                }));
 
     m_controller
         .shooter()
