@@ -9,4 +9,8 @@ public class ShooterIOReplay implements ShooterIO {
 
   @Override
   public void setCurrentLimits(double supplyLimit) {}
+
+  @Override
+  public void setPIDFF(double kP, double kI, double kD, double kS) {
+  }
 }

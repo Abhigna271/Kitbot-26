@@ -1,6 +1,7 @@
 package frc.robot.subsystems.shooter;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
 import frc.robot.Constants.ShooterConstants;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,9 +23,16 @@ public class Shooter extends SubsystemBase {
     Map<ShooterState, Runnable> periodicHash = new HashMap<>();
     periodicHash.put(ShooterState.kIdle, this::idlePeriodic);
     periodicHash.put(ShooterState.kSpinning, this::spinningPeriodic);
-
     m_profiles = new frc.robot.util.SubsystemProfiles<>(periodicHash, ShooterState.kIdle);
+
+  if (Robot.isReal()) {
+    m_io.setPIDFF(
+      ShooterConstants.kShooterP.get(),
+      ShooterConstants.kShooterI.get(),
+      ShooterConstants.kShooterD.get(),
+      ShooterConstants.kShooterKS.get());
   }
+}
 
   @Override
   public void periodic() {
