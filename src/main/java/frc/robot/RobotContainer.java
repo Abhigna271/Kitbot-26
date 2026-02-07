@@ -10,7 +10,6 @@ import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeIOKraken;
 import frc.robot.subsystems.intake.IntakeIOSim;
 import frc.robot.subsystems.shooter.Shooter;
-import frc.robot.subsystems.shooter.Shooter.ShooterState;
 import frc.robot.subsystems.shooter.ShooterIOKraken;
 import frc.robot.subsystems.shooter.ShooterIOSim;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
@@ -65,18 +64,14 @@ public class RobotContainer {
 
     m_controller
         .shooter()
-        .onTrue(
+        .onChange(
             Commands.runOnce(
                 () -> {
-                  m_shooter.updateState(ShooterState.kSpinning);
-                }));
-
-    m_controller
-        .shooter()
-        .onFalse(
-            Commands.runOnce(
-                () -> {
-                  m_shooter.updateState(ShooterState.kIdle);
+                  if (m_shooter.getCurrentState() != Shooter.ShooterState.kIdle) {
+                    m_shooter.updateState(Shooter.ShooterState.kIdle);
+                  } else {
+                    m_shooter.updateState(Shooter.ShooterState.kSpinning);
+                  }
                 }));
   }
 
