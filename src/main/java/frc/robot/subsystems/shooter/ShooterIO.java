@@ -19,4 +19,6 @@ public interface ShooterIO {
   public void setVoltage(double voltage);
 
   public void setCurrentLimits(double supplyLimit);
+
+  public void setPIDFF(double kP, double kI, double kD, double kS);
 }

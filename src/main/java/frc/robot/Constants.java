@@ -206,6 +206,14 @@ public final class Constants {
         new LoggedTunableNumber("ShooterIdleVoltage", 0);
     public static final LoggedTunableNumber kSpinningVoltage =
         new LoggedTunableNumber("ShooterSpinningVoltage", 1);
+    public static final LoggedTunableNumber kShooterP = 
+        new LoggedTunableNumber("Shooter P", 1.0);
+    public static final LoggedTunableNumber kShooterI = 
+        new LoggedTunableNumber("Shooter I", 1.0);
+    public static final LoggedTunableNumber kShooterD = 
+        new LoggedTunableNumber("Shooter D", 1.0);
+    public static final LoggedTunableNumber kShooterKS = 
+        new LoggedTunableNumber("Shooter kS", 1.0);
     // sim
     public static final DCMotor kSimGearbox = DCMotor.getKrakenX60(01);
     public static final double kSimMOI = .005;
