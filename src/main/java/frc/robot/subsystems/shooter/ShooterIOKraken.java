@@ -16,7 +16,6 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.ConnectedMotorValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.StaticFeedforwardSignValue;
-
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.units.measure.Temperature;
@@ -128,13 +127,14 @@ public class ShooterIOKraken implements ShooterIO {
 
   @Override
   public void setPIDFF(double kP, double kI, double kD, double kS) {
-      m_motor
-      .getConfigurator()
-      .apply(m_config.Slot0.withKP(kP)
-        .withKI(kI)
-        .withKD(kD)
-        .withKS(kS)
-        .withStaticFeedforwardSign(StaticFeedforwardSignValue.UseClosedLoopSign),
-        0.0);
+    m_motor
+        .getConfigurator()
+        .apply(
+            m_config.Slot0.withKP(kP)
+                .withKI(kI)
+                .withKD(kD)
+                .withKS(kS)
+                .withStaticFeedforwardSign(StaticFeedforwardSignValue.UseClosedLoopSign),
+            0.0);
   }
 }
