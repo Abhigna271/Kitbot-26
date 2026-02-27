@@ -7,7 +7,7 @@ import java.util.HashMap;
 import org.littletonrobotics.junction.Logger;
 
 public class Drive extends SubsystemBase {
-  public DifferentialDrive m_drivetrain;
+  private DifferentialDrive m_drivetrain;
 
   private SubsystemProfiles<DriveState> m_profiles;
   public final DriveInputsAutoLogged m_driveInputs;
