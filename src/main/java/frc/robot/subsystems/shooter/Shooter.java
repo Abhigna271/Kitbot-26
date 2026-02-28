@@ -59,7 +59,5 @@ public class Shooter extends SubsystemBase {
     return m_profiles.getCurrentProfile();
   }
 
-  public double getCurrentVelocity() {
-    return m_inputs.velocityRPS;
   }
-}
+

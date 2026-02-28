@@ -10,8 +10,9 @@ import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeIOKraken;
 import frc.robot.subsystems.intake.IntakeIOSim;
 import frc.robot.subsystems.shooter.Shooter;
-import frc.robot.subsystems.shooter.ShooterIOKraken;
 import frc.robot.subsystems.shooter.ShooterIOSim;
+import frc.robot.subsystems.shooter.ShooterIOSparkMax;
+
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 public class RobotContainer {
@@ -36,7 +37,7 @@ public class RobotContainer {
 
     if (RobotBase.isReal()) {
       m_intake = new Intake(new IntakeIOKraken(Ports.kIntake, Ports.kIntakeCanivoreName));
-      m_shooter = new Shooter(new ShooterIOKraken(Ports.kShooter, Ports.kShooterCanivoreName));
+      m_shooter = new Shooter(new ShooterIOSparkMax(Ports.kShooter));
     } else {
       m_intake = new Intake(new IntakeIOSim());
       m_shooter = new Shooter(new ShooterIOSim());

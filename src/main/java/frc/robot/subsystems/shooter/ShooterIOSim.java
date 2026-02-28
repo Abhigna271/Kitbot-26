@@ -22,11 +22,9 @@ public class ShooterIOSim implements ShooterIO {
     m_sim.setInputVoltage(m_voltage);
     m_sim.update(0.02);
 
-    inputs.velocityRPS = m_sim.getAngularVelocityRPM() / 60;
-    inputs.accelerationRPSSq = Units.radiansToRotations(m_sim.getAngularAccelerationRadPerSecSq());
+    inputs.voltage = m_sim.getInputVoltage();
     inputs.current = m_sim.getCurrentDrawAmps();
-    inputs.voltage = m_voltage;
-    inputs.motorIsConnected = true;
+    inputs.output = m_sim.getOutput(0);
   }
 
   @Override
