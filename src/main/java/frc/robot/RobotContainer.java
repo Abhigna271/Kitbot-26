@@ -6,6 +6,9 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.Constants.Ports;
 import frc.robot.oi.DriverControls;
 import frc.robot.oi.DriverControlsPS5;
+import frc.robot.subsystems.Drive.Drive;
+import frc.robot.subsystems.Drive.DriveIO;
+import frc.robot.subsystems.Drive.DriveIOCIM;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeIOKraken;
 import frc.robot.subsystems.intake.IntakeIOSim;
@@ -23,6 +26,8 @@ public class RobotContainer {
   // Controller
   private DriverControls m_controller;
 
+  private Drive m_drive;
+
   // Dashboard inputs
   private LoggedDashboardChooser<Command> m_autoChooser;
 
@@ -36,13 +41,14 @@ public class RobotContainer {
   public void configureSubsystems() {
 
     if (RobotBase.isReal()) {
-      m_intake = new Intake(new IntakeIOKraken(Ports.kIntake, Ports.kIntakeCanivoreName));
-      m_shooter = new Shooter(new ShooterIOSparkMax(Ports.kShooter));
+      m_intake = new Intake(new IntakeIOSparkMax(Ports.kIntake, Ports.kIntakeCanivoreName));
+      m_shooter = new Shooter(new ShooterIOSparkMax(Ports.kShooter, Ports.kShooterCanivoreName));
+      m_drive = new Drive(new DriveIOCIM());
     } else {
       m_intake = new Intake(new IntakeIOSim());
       m_shooter = new Shooter(new ShooterIOSim());
-    }
-  }
+      m_drive = new Drive(new DriveIOCIM());
+  }}
 
   public void configureCommands() {}
 

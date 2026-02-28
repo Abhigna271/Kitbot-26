@@ -26,7 +26,7 @@ import frc.robot.util.CtreBaseRefreshManager;
 import java.util.List;
 
 // Contains general hardware, motor, statussignals, etc
-public class IntakeIOKraken implements IntakeIO {
+public class IntakeIOSparkMax implements IntakeIO {
   private TalonFX m_motor;
 
   private StatusSignal<ConnectedMotorValue> m_connectedMotor;
@@ -44,7 +44,7 @@ public class IntakeIOKraken implements IntakeIO {
   private VoltageOut m_voltageOut = new VoltageOut(0.0).withEnableFOC(true);
 
   // constructor
-  public IntakeIOKraken(int Port, String Bus) {
+  public IntakeIOSparkMax(int Port, String Bus) {
     // initializing motor
     m_motor = new TalonFX(Port, Bus);
 
