@@ -1,7 +1,6 @@
 package frc.robot.subsystems.intake;
 
 import edu.wpi.first.math.system.plant.LinearSystemId;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import frc.robot.Constants.IntakeConstants;
 
@@ -25,18 +24,14 @@ public class IntakeIOSim implements IntakeIO {
     m_sim.update(0.02);
 
     // sets simulation statistics and auto data
-    inputs.velocityRPS = m_sim.getAngularVelocityRPM() / 60;
-    inputs.accelerationRPSSq = Units.radiansToRotations(m_sim.getAngularAccelerationRadPerSecSq());
+    inputs.voltage = m_sim.getInputVoltage();
     inputs.current = m_sim.getCurrentDrawAmps();
-    inputs.voltage = m_voltage;
-    inputs.motorIsConnected = true;
+    inputs.output = m_sim.getOutput(0);
+
   }
 
   @Override
   public void setVoltage(double volt) {
     m_voltage = volt;
   }
-
-  @Override
-  public void setCurrentLimits(double supplyLimit) {}
 }

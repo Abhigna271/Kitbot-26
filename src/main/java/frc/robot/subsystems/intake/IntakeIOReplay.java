@@ -6,7 +6,4 @@ public class IntakeIOReplay implements IntakeIO {
 
   @Override
   public void setVoltage(double volt) {}
-
-  @Override
-  public void setCurrentLimits(double supplyLimit) {}
 }

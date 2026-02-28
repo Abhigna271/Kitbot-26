@@ -65,7 +65,4 @@ public class Intake extends SubsystemBase {
     // tells what its in
   }
 
-  public double getCurrentVelocity() {
-    return m_inputs.velocityRPS;
-  }
 }
