@@ -30,8 +30,8 @@ public class Kicker extends SubsystemBase {
     m_io.updateInputs(m_inputs);
     m_profiles.getPeriodicFunctionTimed().run();
 
-    Logger.processInputs("Shooter", m_inputs);
-    Logger.recordOutput("Shooter/state", m_profiles.getCurrentProfile());
+    Logger.processInputs("Kicker", m_inputs);
+    Logger.recordOutput("Kicker/state", m_profiles.getCurrentProfile());
   }
 
   public void idlePeriodic() {

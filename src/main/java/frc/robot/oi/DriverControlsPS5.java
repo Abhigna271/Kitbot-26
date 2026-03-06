@@ -10,38 +10,28 @@ public class DriverControlsPS5 implements DriverControls {
     m_controller = new CommandPS5Controller(port);
   }
 
-  @Override
-  public double getForward() {
-    return -m_controller.getLeftY();
+ @Override
+  public double getMovement() {
+    return m_controller.getLeftY();
   }
 
   @Override
-  public double getStrafe() {
-    return -m_controller.getLeftX();
-  }
-
-  @Override
-  public double getTurn() {
-    return -m_controller.getRightX();
-  }
-
-  @Override
-  public Trigger resetFieldCentric() {
-    return m_controller.touchpad();
+  public double getRotation() {
+    return m_controller.getRightX();
   }
 
   @Override
   public Trigger intake() {
-    return m_controller.R1();
+    return m_controller.L2();
   }
 
   @Override
   public Trigger rev() {
-    return m_controller.cross();
+    return m_controller.R2();
   }
 
   @Override
   public Trigger shoot() {
-    return m_controller.R2();
+    return m_controller.R1();
   }
 }

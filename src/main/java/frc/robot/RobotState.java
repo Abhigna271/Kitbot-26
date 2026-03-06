@@ -48,12 +48,15 @@ public class RobotState {
       case kTeleopDefault:
         m_Intake.updateState(IntakeState.kIdle);
         m_Kicker.updateState(KickerState.kIdle);
+        break;
       case kIntaking:
         m_Intake.updateState(IntakeState.kIntaking);
         m_Kicker.updateState(KickerState.kIdle);
+        break;
       case kShooting:
         m_Intake.updateState(IntakeState.kShooting);
         m_Kicker.updateState(KickerState.kSpinning);
+        break;
       default:
         break;
     }

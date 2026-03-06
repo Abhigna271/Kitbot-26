@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.Constants.Ports;
 import frc.robot.RobotState.RobotAction;
+import frc.robot.commands.DriveCommands;
 import frc.robot.oi.DriverControls;
 import frc.robot.oi.DriverControlsPS5;
 import frc.robot.subsystems.Drive.Drive;
@@ -12,6 +13,7 @@ import frc.robot.subsystems.Drive.DriveIOCIM;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeIOSim;
 import frc.robot.subsystems.intake.IntakeIOSparkMax;
+import frc.robot.subsystems.intake.Intake.IntakeState;
 import frc.robot.subsystems.shooter.Kicker;
 import frc.robot.subsystems.shooter.KickerIOSim;
 import frc.robot.subsystems.shooter.KickerIOSparkMax;
@@ -59,31 +61,33 @@ public class RobotContainer {
   }
 
   public void configureBindings() {
+    m_drive.setDefaultCommand(
+        DriveCommands.arcadeDrive(m_drive, m_controller::getMovement, m_controller::getRotation));
     m_controller
         .intake()
         .onTrue(
             Commands.runOnce(
                 () -> {
-                  if (m_intake.getCurrentState() != Intake.IntakeState.kIdle) {
-                    m_intake.updateState(Intake.IntakeState.kIdle);
+                  if (m_intake.getCurrentState() != Intake.IntakeState.kIntaking) {
+                    m_intake.updateState(IntakeState.kIntaking);
                   } else {
-                    m_intake.updateState(Intake.IntakeState.kIntaking);
+                    m_intake.updateState(IntakeState.kIdle);
                   }
                 }));
     m_controller
         .rev()
-        .onChange(
+        .onTrue(
             Commands.runOnce(
                 () -> {
                   if (m_intake.getCurrentState() != Intake.IntakeState.kShooting) {
-                    m_intake.updateState(Intake.IntakeState.kIdle);
+                    m_intake.updateState(IntakeState.kShooting);
                   } else {
-                    m_intake.updateState(Intake.IntakeState.kShooting);
+                    m_intake.updateState(IntakeState.kIdle);
                   }
                 }));
     m_controller
         .shoot()
-        .onChange(
+        .onTrue(
             Commands.runOnce(
                 () -> {
                   if (RobotState.getInstance().getCurrAction() != RobotAction.kShooting) {

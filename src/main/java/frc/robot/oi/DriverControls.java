@@ -3,13 +3,9 @@ package frc.robot.oi;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public interface DriverControls {
-  public double getForward();
+   public double getMovement();
 
-  public double getStrafe();
-
-  public double getTurn();
-
-  public Trigger resetFieldCentric();
+  public double getRotation();
 
   public Trigger intake();
 

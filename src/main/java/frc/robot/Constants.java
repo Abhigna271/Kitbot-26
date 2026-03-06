@@ -68,6 +68,7 @@ public final class Constants {
   public static final boolean kUseAlerts = true && kCurrentMode != Mode.SIM;
 
   public static final class DriveConstants {
+    public static final double kMaxInput = 0.5;
     public static final double kMaxLinearSpeed = 4.5; // meters per second
     public static final double kMaxDriveToPointSpeed = 3.6;
     public static final double kMaxMeshedSpeed = 4.5;
