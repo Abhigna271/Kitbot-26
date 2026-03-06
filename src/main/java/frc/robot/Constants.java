@@ -191,6 +191,8 @@ public final class Constants {
         new LoggedTunableNumber("Intake/idleVoltage", 0.0);
     public static final LoggedTunableNumber kSpinningVoltage =
         new LoggedTunableNumber("Intake/spinningVoltage", 2.0);
+    public static final LoggedTunableNumber kRevVoltage =
+        new LoggedTunableNumber("Intake/revVoltage", -8.0);
 
     public static final double kGearRatio = 16.0 / 32.0;
 

@@ -63,12 +63,12 @@ public class RobotContainer {
                   if (m_intake.getCurrentState() != Intake.IntakeState.kIdle) {
                     m_intake.updateState(Intake.IntakeState.kIdle);
                   } else {
-                    m_intake.updateState(Intake.IntakeState.kSpinning);
+                    m_intake.updateState(Intake.IntakeState.kShooter);
                   }
                 }));
 
     m_controller
-        .shooter()
+        .shoot()
         .onChange(
             Commands.runOnce(
                 () -> {
@@ -78,6 +78,9 @@ public class RobotContainer {
                     m_shooter.updateState(Shooter.ShooterState.kSpinning);
                   }
                 }));
+    m_controller
+        .rev()
+        . 
   }
 
   public Command getAutonomousCommand() {

@@ -18,7 +18,8 @@ public class Intake extends SubsystemBase {
 
   public static enum IntakeState {
     kIdle,
-    kSpinning,
+    kShooter,
+    kRev,
     // list of states there
   }
 
@@ -27,7 +28,8 @@ public class Intake extends SubsystemBase {
     m_io = intakeIO;
     Map<IntakeState, Runnable> periodicHash = new HashMap<>();
     periodicHash.put(IntakeState.kIdle, this::idlePeriodic);
-    periodicHash.put(IntakeState.kSpinning, this::spinningPeriodic);
+    periodicHash.put(IntakeState.kShooter, this::spinningPeriodic);
+    periodicHash.put(IntakeState.kRev, this::revPeriodic);
     // creating map/connecting the variables called periodic hash
     // Runnable creates "threading"/runs it at the same time
 
@@ -55,6 +57,10 @@ public class Intake extends SubsystemBase {
     m_io.setVoltage(IntakeConstants.kSpinningVoltage.get());
   }
 
+  public void revPeriodic() {
+    m_io.setVoltage(IntakeConstants.kRevVoltage.get());
+  }
+
   public void updateState(IntakeState state) {
     m_profiles.setCurrentProfile(state);
     // allows to switch between states
@@ -65,3 +71,4 @@ public class Intake extends SubsystemBase {
     // tells what its in
   }
 }
+

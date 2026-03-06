@@ -13,5 +13,7 @@ public interface DriverControls {
 
   public Trigger intake();
 
-  public Trigger shooter();
+  public Trigger rev();
+
+  public Trigger shoot();
 }
