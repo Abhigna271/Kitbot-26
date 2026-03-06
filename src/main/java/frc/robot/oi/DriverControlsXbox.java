@@ -37,7 +37,7 @@ public class DriverControlsXbox implements DriverControls {
 
   @Override
   public Trigger rev() {
-      return m_controller.a();
+    return m_controller.a();
   }
 
   @Override

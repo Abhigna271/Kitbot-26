@@ -35,10 +35,10 @@ public class DriverControlsPS5 implements DriverControls {
     return m_controller.R1();
   }
 
- @Override
- public Trigger rev() {
-     return m_controller.cross();
- }
+  @Override
+  public Trigger rev() {
+    return m_controller.cross();
+  }
 
   @Override
   public Trigger shoot() {

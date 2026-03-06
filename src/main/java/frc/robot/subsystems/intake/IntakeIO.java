@@ -14,4 +14,6 @@ public interface IntakeIO {
   public void updateInputs(IntakeInputs inputs);
 
   public void setVoltage(double volt);
+
+  public void setPIDFF(double kP, double kI, double kD, double kS);
 }

@@ -33,4 +33,9 @@ public class IntakeIOSim implements IntakeIO {
   public void setVoltage(double volt) {
     m_voltage = volt;
   }
+
+  @Override
+  public void setPIDFF(double kP, double kI, double kD, double kS) {
+    // no PID for sim
+  }
 }

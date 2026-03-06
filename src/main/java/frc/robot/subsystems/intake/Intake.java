@@ -2,6 +2,7 @@ package frc.robot.subsystems.intake;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.IntakeConstants;
+import frc.robot.Robot;
 import frc.robot.util.SubsystemProfiles;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,8 +19,8 @@ public class Intake extends SubsystemBase {
 
   public static enum IntakeState {
     kIdle,
-    kShooter,
-    kRev,
+    kShooting,
+    kIntaking
     // list of states there
   }
 
@@ -28,13 +29,21 @@ public class Intake extends SubsystemBase {
     m_io = intakeIO;
     Map<IntakeState, Runnable> periodicHash = new HashMap<>();
     periodicHash.put(IntakeState.kIdle, this::idlePeriodic);
-    periodicHash.put(IntakeState.kShooter, this::spinningPeriodic);
-    periodicHash.put(IntakeState.kRev, this::revPeriodic);
+    periodicHash.put(IntakeState.kShooting, this::shootingPeriodic);
+    periodicHash.put(IntakeState.kIntaking, this::intakingPeriodic);
     // creating map/connecting the variables called periodic hash
     // Runnable creates "threading"/runs it at the same time
 
     m_profiles = new SubsystemProfiles<>(periodicHash, IntakeState.kIdle);
     // making profiles the hash map, then default state
+
+    if (Robot.isReal()) {
+      m_io.setPIDFF(
+          IntakeConstants.kShooterP.get(),
+          IntakeConstants.kShooterI.get(),
+          IntakeConstants.kShooterD.get(),
+          IntakeConstants.kShooterKS.get());
+    }
   }
 
   @Override
@@ -53,12 +62,12 @@ public class Intake extends SubsystemBase {
     // What to do during periodic
   }
 
-  public void spinningPeriodic() {
-    m_io.setVoltage(IntakeConstants.kSpinningVoltage.get());
+  public void shootingPeriodic() {
+    m_io.setVoltage(IntakeConstants.kShootingVoltage.get());
   }
 
-  public void revPeriodic() {
-    m_io.setVoltage(IntakeConstants.kRevVoltage.get());
+  public void intakingPeriodic() {
+    m_io.setVoltage(IntakeConstants.kIntakingVoltage.get());
   }
 
   public void updateState(IntakeState state) {
@@ -71,4 +80,3 @@ public class Intake extends SubsystemBase {
     // tells what its in
   }
 }
-

@@ -2,22 +2,22 @@ package frc.robot.subsystems.shooter;
 
 import edu.wpi.first.math.system.plant.LinearSystemId;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
-import frc.robot.Constants.ShooterConstants;
+import frc.robot.Constants.KickerConstants;
 
-public class ShooterIOSim implements ShooterIO {
+public class KickerIOSim implements KickerIO {
   private DCMotorSim m_sim;
   private double m_voltage = 0.0;
 
-  public ShooterIOSim() {
+  public KickerIOSim() {
 
     var plant =
         LinearSystemId.createDCMotorSystem(
-            ShooterConstants.kSimGearbox, ShooterConstants.kSimMOI, ShooterConstants.kSimGearing);
-    m_sim = new DCMotorSim(plant, ShooterConstants.kSimGearbox);
+            KickerConstants.kSimGearbox, KickerConstants.kSimMOI, KickerConstants.kSimGearing);
+    m_sim = new DCMotorSim(plant, KickerConstants.kSimGearbox);
   }
 
   @Override
-  public void updateInputs(ShooterInputs inputs) {
+  public void updateInputs(KickerInputs inputs) {
     m_sim.setInputVoltage(m_voltage);
     m_sim.update(0.02);
 
@@ -33,7 +33,4 @@ public class ShooterIOSim implements ShooterIO {
 
   @Override
   public void setCurrentLimits(double supplyLimit) {}
-
-  @Override
-  public void setPIDFF(double kP, double kI, double kD, double kS) {}
 }

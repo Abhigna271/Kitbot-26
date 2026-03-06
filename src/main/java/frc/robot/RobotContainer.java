@@ -4,22 +4,24 @@ import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.Constants.Ports;
+import frc.robot.RobotState.RobotAction;
 import frc.robot.oi.DriverControls;
 import frc.robot.oi.DriverControlsPS5;
 import frc.robot.subsystems.Drive.Drive;
 import frc.robot.subsystems.Drive.DriveIOCIM;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeIOSim;
-import frc.robot.subsystems.shooter.Shooter;
-import frc.robot.subsystems.shooter.ShooterIOSim;
-import frc.robot.subsystems.shooter.ShooterIOSparkMax;
+import frc.robot.subsystems.intake.IntakeIOSparkMax;
+import frc.robot.subsystems.shooter.Kicker;
+import frc.robot.subsystems.shooter.KickerIOSim;
+import frc.robot.subsystems.shooter.KickerIOSparkMax;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 public class RobotContainer {
 
   private Intake m_intake;
 
-  private Shooter m_shooter;
+  private Kicker m_shooter;
   // Controller
   private DriverControls m_controller;
 
@@ -38,17 +40,19 @@ public class RobotContainer {
   public void configureSubsystems() {
 
     if (RobotBase.isReal()) {
-      m_intake = new Intake(new IntakeIOSparkMax(Ports.kIntake, Ports.kIntakeCanivoreName));
-      m_shooter = new Shooter(new ShooterIOSparkMax(Ports.kShooter, Ports.kShooterCanivoreName));
+      m_intake = new Intake(new IntakeIOSparkMax(Ports.kIntake));
+      m_shooter = new Kicker(new KickerIOSparkMax(Ports.kShooter));
       m_drive = new Drive(new DriveIOCIM());
     } else {
       m_intake = new Intake(new IntakeIOSim());
-      m_shooter = new Shooter(new ShooterIOSim());
+      m_shooter = new Kicker(new KickerIOSim());
       m_drive = new Drive(new DriveIOCIM());
     }
   }
 
-  public void configureCommands() {}
+  public void configureCommands() {
+    RobotState.startInstance(m_intake, m_shooter);
+  }
 
   public void configureControllers() {
     m_controller = new DriverControlsPS5(0);
@@ -63,24 +67,31 @@ public class RobotContainer {
                   if (m_intake.getCurrentState() != Intake.IntakeState.kIdle) {
                     m_intake.updateState(Intake.IntakeState.kIdle);
                   } else {
-                    m_intake.updateState(Intake.IntakeState.kShooter);
+                    m_intake.updateState(Intake.IntakeState.kIntaking);
                   }
                 }));
-
+    m_controller
+        .rev()
+        .onChange(
+            Commands.runOnce(
+                () -> {
+                  if (m_intake.getCurrentState() != Intake.IntakeState.kShooting) {
+                    m_intake.updateState(Intake.IntakeState.kIdle);
+                  } else {
+                    m_intake.updateState(Intake.IntakeState.kShooting);
+                  }
+                }));
     m_controller
         .shoot()
         .onChange(
             Commands.runOnce(
                 () -> {
-                  if (m_shooter.getCurrentState() != Shooter.ShooterState.kIdle) {
-                    m_shooter.updateState(Shooter.ShooterState.kIdle);
+                  if (RobotState.getInstance().getCurrAction() != RobotAction.kShooting) {
+                    RobotState.getInstance().updateRobotAction(RobotAction.kShooting);
                   } else {
-                    m_shooter.updateState(Shooter.ShooterState.kSpinning);
+                    RobotState.getInstance().updateRobotAction(RobotAction.kTeleopDefault);
                   }
                 }));
-    m_controller
-        .rev()
-        . 
   }
 
   public Command getAutonomousCommand() {

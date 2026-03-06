@@ -6,4 +6,7 @@ public class IntakeIOReplay implements IntakeIO {
 
   @Override
   public void setVoltage(double volt) {}
+
+  @Override
+  public void setPIDFF(double kP, double kI, double kD, double kS) {}
 }

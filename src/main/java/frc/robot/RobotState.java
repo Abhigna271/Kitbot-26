@@ -2,8 +2,8 @@ package frc.robot;
 
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.Intake.IntakeState;
-import frc.robot.subsystems.shooter.Shooter;
-import frc.robot.subsystems.shooter.Shooter.ShooterState;
+import frc.robot.subsystems.shooter.Kicker;
+import frc.robot.subsystems.shooter.Kicker.KickerState;
 import frc.robot.util.SubsystemProfiles;
 import java.util.HashMap;
 import org.littletonrobotics.junction.Logger;
@@ -15,17 +15,14 @@ public class RobotState {
     kTeleopDefault,
     kIntaking,
     kShooting,
-
   }
 
   private SubsystemProfiles<RobotAction> m_profiles;
   private static RobotState m_instance;
   private Intake m_Intake;
-  private Shooter m_Shooter;
+  private Kicker m_Kicker;
 
-
-
-  public RobotState(Intake m_Intake, Shooter m_Shooter) {
+  public RobotState(Intake m_Intake, Kicker m_Kicker) {
 
     HashMap<RobotAction, Runnable> hash = new HashMap<>();
     hash.put(RobotAction.kAutoDefault, () -> {});
@@ -35,7 +32,7 @@ public class RobotState {
 
     m_profiles = new SubsystemProfiles<>(hash, RobotAction.kTeleopDefault);
     this.m_Intake = m_Intake;
-    this.m_Shooter = m_Shooter;
+    this.m_Kicker = m_Kicker;
   }
 
   public void updateRobotState() {
@@ -49,12 +46,14 @@ public class RobotState {
       case kAutoDefault:
         break;
       case kTeleopDefault:
-        break;
+        m_Intake.updateState(IntakeState.kIdle);
+        m_Kicker.updateState(KickerState.kIdle);
       case kIntaking:
-        break;
+        m_Intake.updateState(IntakeState.kIntaking);
+        m_Kicker.updateState(KickerState.kIdle);
       case kShooting:
-        m_Intake.updateState(IntakeState.kRev);
-        m_Shooter.updateState(ShooterState.kSpinning);
+        m_Intake.updateState(IntakeState.kShooting);
+        m_Kicker.updateState(KickerState.kSpinning);
       default:
         break;
     }
@@ -66,9 +65,9 @@ public class RobotState {
     return m_instance;
   }
 
-  public static RobotState startInstance() {
+  public static RobotState startInstance(Intake m_Intake, Kicker m_Kicker) {
     if (m_instance == null) {
-      m_instance = new RobotState();
+      m_instance = new RobotState(m_Intake, m_Kicker);
     }
     return m_instance;
   }

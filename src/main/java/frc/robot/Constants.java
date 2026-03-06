@@ -189,11 +189,12 @@ public final class Constants {
         new LoggedTunableNumber("Intake/intakingVoltage", 8.0);
     public static final LoggedTunableNumber kIdleVoltage =
         new LoggedTunableNumber("Intake/idleVoltage", 0.0);
-    public static final LoggedTunableNumber kSpinningVoltage =
-        new LoggedTunableNumber("Intake/spinningVoltage", 2.0);
-    public static final LoggedTunableNumber kRevVoltage =
+    public static final LoggedTunableNumber kShootingVoltage =
         new LoggedTunableNumber("Intake/revVoltage", -8.0);
-
+    public static final LoggedTunableNumber kShooterP = new LoggedTunableNumber("Shooter P", 1.0);
+    public static final LoggedTunableNumber kShooterI = new LoggedTunableNumber("Shooter I", 1.0);
+    public static final LoggedTunableNumber kShooterD = new LoggedTunableNumber("Shooter D", 1.0);
+    public static final LoggedTunableNumber kShooterKS = new LoggedTunableNumber("Shooter kS", 1.0);
     public static final double kGearRatio = 16.0 / 32.0;
 
     // sim
@@ -202,16 +203,12 @@ public final class Constants {
     public static final double kSimGearing = 16.0 / 32.0;
   }
 
-  public static final class ShooterConstants {
+  public static final class KickerConstants {
     public static final double kGearRatio = 10 / 82;
     public static final LoggedTunableNumber kIdleVoltage =
         new LoggedTunableNumber("ShooterIdleVoltage", 0);
     public static final LoggedTunableNumber kSpinningVoltage =
         new LoggedTunableNumber("ShooterSpinningVoltage", 1);
-    public static final LoggedTunableNumber kShooterP = new LoggedTunableNumber("Shooter P", 1.0);
-    public static final LoggedTunableNumber kShooterI = new LoggedTunableNumber("Shooter I", 1.0);
-    public static final LoggedTunableNumber kShooterD = new LoggedTunableNumber("Shooter D", 1.0);
-    public static final LoggedTunableNumber kShooterKS = new LoggedTunableNumber("Shooter kS", 1.0);
     // sim
     public static final DCMotor kSimGearbox = DCMotor.getKrakenX60(01);
     public static final double kSimMOI = .005;
