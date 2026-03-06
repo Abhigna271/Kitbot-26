@@ -7,15 +7,12 @@ import frc.robot.Constants.Ports;
 import frc.robot.oi.DriverControls;
 import frc.robot.oi.DriverControlsPS5;
 import frc.robot.subsystems.Drive.Drive;
-import frc.robot.subsystems.Drive.DriveIO;
 import frc.robot.subsystems.Drive.DriveIOCIM;
 import frc.robot.subsystems.intake.Intake;
-import frc.robot.subsystems.intake.IntakeIOKraken;
 import frc.robot.subsystems.intake.IntakeIOSim;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.shooter.ShooterIOSim;
 import frc.robot.subsystems.shooter.ShooterIOSparkMax;
-
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 public class RobotContainer {
@@ -48,7 +45,8 @@ public class RobotContainer {
       m_intake = new Intake(new IntakeIOSim());
       m_shooter = new Shooter(new ShooterIOSim());
       m_drive = new Drive(new DriveIOCIM());
-  }}
+    }
+  }
 
   public void configureCommands() {}
 

@@ -58,6 +58,4 @@ public class Shooter extends SubsystemBase {
   public ShooterState getCurrentState() {
     return m_profiles.getCurrentProfile();
   }
-
-  }
-
+}

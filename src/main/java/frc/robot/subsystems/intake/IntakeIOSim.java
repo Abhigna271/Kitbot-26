@@ -27,7 +27,6 @@ public class IntakeIOSim implements IntakeIO {
     inputs.voltage = m_sim.getInputVoltage();
     inputs.current = m_sim.getCurrentDrawAmps();
     inputs.output = m_sim.getOutput(0);
-
   }
 
   @Override

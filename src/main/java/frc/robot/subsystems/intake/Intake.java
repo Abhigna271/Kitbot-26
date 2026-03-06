@@ -64,5 +64,4 @@ public class Intake extends SubsystemBase {
     return m_profiles.getCurrentProfile();
     // tells what its in
   }
-
 }
