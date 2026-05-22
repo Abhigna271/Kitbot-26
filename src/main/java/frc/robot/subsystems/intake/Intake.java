@@ -71,6 +71,7 @@ public class Intake extends SubsystemBase {
   }
 
   public void updateState(IntakeState state) {
+    Logger.recordOutput("IntakeStatehasupdated", true);
     m_profiles.setCurrentProfile(state);
     // allows to switch between states
   }

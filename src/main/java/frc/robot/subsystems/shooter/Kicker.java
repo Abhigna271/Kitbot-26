@@ -43,6 +43,7 @@ public class Kicker extends SubsystemBase {
   }
 
   public void updateState(KickerState state) {
+    Logger.recordOutput("KickerStatehasupdated", true);
     m_profiles.setCurrentProfile(state);
   }
 

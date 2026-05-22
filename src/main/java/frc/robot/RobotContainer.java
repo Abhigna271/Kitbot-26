@@ -68,6 +68,7 @@ public class RobotContainer {
         .onTrue(
             Commands.runOnce(
                 () -> {
+                  org.littletonrobotics.junction.Logger.recordOutput("Intake/fires", true);
                   if (m_intake.getCurrentState() != Intake.IntakeState.kIntaking) {
                     m_intake.updateState(IntakeState.kIntaking);
                   } else {
@@ -79,6 +80,7 @@ public class RobotContainer {
         .onTrue(
             Commands.runOnce(
                 () -> {
+                  org.littletonrobotics.junction.Logger.recordOutput("rev/fires", true);
                   if (m_intake.getCurrentState() != Intake.IntakeState.kShooting) {
                     m_intake.updateState(IntakeState.kShooting);
                   } else {
@@ -90,6 +92,7 @@ public class RobotContainer {
         .onTrue(
             Commands.runOnce(
                 () -> {
+                  org.littletonrobotics.junction.Logger.recordOutput("shooter/fires", true);
                   if (RobotState.getInstance().getCurrAction() != RobotAction.kShooting) {
                     RobotState.getInstance().updateRobotAction(RobotAction.kShooting);
                   } else {
