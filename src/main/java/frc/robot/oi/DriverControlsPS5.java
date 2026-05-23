@@ -22,16 +22,16 @@ public class DriverControlsPS5 implements DriverControls {
 
   @Override
   public Trigger intake() {
-    return m_controller.L2();
-  }
-
-  @Override
-  public Trigger rev() {
     return m_controller.R2();
   }
 
   @Override
+  public Trigger rev() {
+    return m_controller.L2();
+  }
+
+  @Override
   public Trigger shoot() {
-    return m_controller.R1();
+    return m_controller.L1();
   }
 }

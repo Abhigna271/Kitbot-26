@@ -19,7 +19,6 @@ public class Intake extends SubsystemBase {
 
   public static enum IntakeState {
     kIdle,
-    kShooting,
     kIntaking
     // list of states there
   }
@@ -60,7 +59,6 @@ public class Intake extends SubsystemBase {
     m_io.setVoltage(IntakeConstants.kIdleVoltage.get());
     // What to do during periodic
   }
-
 
   public void intakingPeriodic() {
     m_io.setVoltage(IntakeConstants.kIntakingVoltage.get());
