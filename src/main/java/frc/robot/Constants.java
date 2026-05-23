@@ -336,8 +336,8 @@ public final class Constants {
 
     public static final String kDriveCanivoreName = "Drivetrain";
 
-    public static final int kIntakePort = 13;
-    public static final int kShooterPort = 12;
+    public static final int kIntakePort = 12;
+    public static final int kShooterPort = 13;
 
     public static final String kMainCanivoreName = "Main";
     public static final String kIntakeCanivoreName = "Intake";
