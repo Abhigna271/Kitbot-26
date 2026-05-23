@@ -187,11 +187,9 @@ public final class Constants {
 
   public static final class IntakeConstants {
     public static final LoggedTunableNumber kIntakingVoltage =
-        new LoggedTunableNumber("Intake/intakingVoltage", 8.0);
+        new LoggedTunableNumber("Intake/intakingVoltage", 1.0);
     public static final LoggedTunableNumber kIdleVoltage =
         new LoggedTunableNumber("Intake/idleVoltage", 0.0);
-    public static final LoggedTunableNumber kShootingVoltage =
-        new LoggedTunableNumber("Intake/revVoltage", -8.0);
     public static final LoggedTunableNumber kShooterP = new LoggedTunableNumber("Shooter P", 1.0);
     public static final LoggedTunableNumber kShooterI = new LoggedTunableNumber("Shooter I", 1.0);
     public static final LoggedTunableNumber kShooterD = new LoggedTunableNumber("Shooter D", 1.0);
@@ -209,7 +207,9 @@ public final class Constants {
     public static final LoggedTunableNumber kIdleVoltage =
         new LoggedTunableNumber("ShooterIdleVoltage", 0);
     public static final LoggedTunableNumber kSpinningVoltage =
-        new LoggedTunableNumber("ShooterSpinningVoltage", 1);
+        new LoggedTunableNumber("SpinningIntakeVoltage", 8);
+    public static final LoggedTunableNumber kShootingVoltage =
+        new LoggedTunableNumber("ShootingVoltage", -8);
     // sim
     public static final DCMotor kSimGearbox = DCMotor.getKrakenX60(01);
     public static final double kSimMOI = .005;
@@ -336,8 +336,8 @@ public final class Constants {
 
     public static final String kDriveCanivoreName = "Drivetrain";
 
-    public static final int kIntake = 12;
-    public static final int kShooter = 13;
+    public static final int kIntakePort = 13;
+    public static final int kShooterPort = 12;
 
     public static final String kMainCanivoreName = "Main";
     public static final String kIntakeCanivoreName = "Intake";

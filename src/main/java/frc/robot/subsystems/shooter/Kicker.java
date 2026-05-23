@@ -14,14 +14,15 @@ public class Kicker extends SubsystemBase {
 
   public static enum KickerState {
     kIdle,
-    kSpinning,
+    kSpinningIntake,
+    kShooting;
   }
 
   public Kicker(KickerIO kickerIO) {
     m_io = kickerIO;
     Map<KickerState, Runnable> periodicHash = new HashMap<>();
     periodicHash.put(KickerState.kIdle, this::idlePeriodic);
-    periodicHash.put(KickerState.kSpinning, this::spinningPeriodic);
+    periodicHash.put(KickerState.kSpinningIntake, this::spinningIntakePeriodic);
     m_profiles = new frc.robot.util.SubsystemProfiles<>(periodicHash, KickerState.kIdle);
   }
 
@@ -38,8 +39,12 @@ public class Kicker extends SubsystemBase {
     m_io.setVoltage(KickerConstants.kIdleVoltage.get());
   }
 
-  public void spinningPeriodic() {
+  public void spinningIntakePeriodic() {
     m_io.setVoltage(KickerConstants.kSpinningVoltage.get());
+  }
+
+  public void kShooting() {
+    m_io.setVoltage(KickerConstants.kShootingVoltage.get());
   }
 
   public void updateState(KickerState state) {

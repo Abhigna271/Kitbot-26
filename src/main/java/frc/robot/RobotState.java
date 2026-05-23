@@ -54,8 +54,8 @@ public class RobotState {
         m_Kicker.updateState(KickerState.kIdle);
         break;
       case kShooting:
-        m_Intake.updateState(IntakeState.kShooting);
-        m_Kicker.updateState(KickerState.kSpinning);
+        m_Intake.updateState(IntakeState.kIntaking);
+        m_Kicker.updateState(KickerState.kShooting);
         break;
       default:
         break;

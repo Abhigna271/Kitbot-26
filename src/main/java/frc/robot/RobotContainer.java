@@ -42,8 +42,8 @@ public class RobotContainer {
   public void configureSubsystems() {
 
     if (RobotBase.isReal()) {
-      m_intake = new Intake(new IntakeIOSparkMax(Ports.kIntake));
-      m_shooter = new Kicker(new KickerIOSparkMax(Ports.kShooter));
+      m_intake = new Intake(new IntakeIOSparkMax(Ports.kIntakePort));
+      m_shooter = new Kicker(new KickerIOSparkMax(Ports.kShooterPort));
       m_drive = new Drive(new DriveIOCIM());
     } else {
       m_intake = new Intake(new IntakeIOSim());

@@ -29,7 +29,6 @@ public class Intake extends SubsystemBase {
     m_io = intakeIO;
     Map<IntakeState, Runnable> periodicHash = new HashMap<>();
     periodicHash.put(IntakeState.kIdle, this::idlePeriodic);
-    periodicHash.put(IntakeState.kShooting, this::shootingPeriodic);
     periodicHash.put(IntakeState.kIntaking, this::intakingPeriodic);
     // creating map/connecting the variables called periodic hash
     // Runnable creates "threading"/runs it at the same time
@@ -62,9 +61,6 @@ public class Intake extends SubsystemBase {
     // What to do during periodic
   }
 
-  public void shootingPeriodic() {
-    m_io.setVoltage(IntakeConstants.kShootingVoltage.get());
-  }
 
   public void intakingPeriodic() {
     m_io.setVoltage(IntakeConstants.kIntakingVoltage.get());
