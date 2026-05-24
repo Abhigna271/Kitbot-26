@@ -10,20 +10,20 @@ import frc.robot.oi.DriverControls;
 import frc.robot.oi.DriverControlsPS5;
 import frc.robot.subsystems.Drive.Drive;
 import frc.robot.subsystems.Drive.DriveIOCIM;
-import frc.robot.subsystems.intake.Intake;
-import frc.robot.subsystems.intake.Intake.IntakeState;
-import frc.robot.subsystems.intake.IntakeIOSim;
-import frc.robot.subsystems.intake.IntakeIOSparkMax;
-import frc.robot.subsystems.shooter.Kicker;
-import frc.robot.subsystems.shooter.KickerIOSim;
-import frc.robot.subsystems.shooter.KickerIOSparkMax;
+import frc.robot.subsystems.Intake.Intake;
+import frc.robot.subsystems.Intake.Intake.IntakeState;
+import frc.robot.subsystems.Intake.IntakeIOSim;
+import frc.robot.subsystems.Intake.IntakeIOSparkMax;
+import frc.robot.subsystems.Kicker.Kicker;
+import frc.robot.subsystems.Kicker.KickerIOSim;
+import frc.robot.subsystems.Kicker.KickerIOSparkMax;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 public class RobotContainer {
 
   private Intake m_intake;
 
-  private Kicker m_shooter;
+  private Kicker m_kicker;
   // Controller
   private DriverControls m_controller;
 
@@ -42,18 +42,18 @@ public class RobotContainer {
   public void configureSubsystems() {
 
     if (RobotBase.isReal()) {
-      m_intake = new Intake(new IntakeIOSparkMax(Ports.kIntakePort));
-      m_shooter = new Kicker(new KickerIOSparkMax(Ports.kShooterPort));
+      m_intake = new Intake(new IntakeIOSparkMax(Ports.kIntake));
+      m_kicker = new Kicker(new KickerIOSparkMax(Ports.kShooter));
       m_drive = new Drive(new DriveIOCIM());
     } else {
       m_intake = new Intake(new IntakeIOSim());
-      m_shooter = new Kicker(new KickerIOSim());
+      m_kicker = new Kicker(new KickerIOSim());
       m_drive = new Drive(new DriveIOCIM());
     }
   }
 
   public void configureCommands() {
-    RobotState.startInstance(m_intake, m_shooter);
+    RobotState.startInstance(m_intake, m_kicker);
   }
 
   public void configureControllers() {
@@ -69,8 +69,8 @@ public class RobotContainer {
             Commands.runOnce(
                 () -> {
                   org.littletonrobotics.junction.Logger.recordOutput("Intake/fires", true);
-                  if (m_intake.getCurrentState() != Intake.IntakeState.kIntaking) {
-                    m_intake.updateState(IntakeState.kIntaking);
+                  if (m_intake.getCurrentState() != Intake.IntakeState.kSpinning) {
+                    m_intake.updateState(IntakeState.kSpinning);
                   } else {
                     m_intake.updateState(IntakeState.kIdle);
                   }
@@ -81,8 +81,8 @@ public class RobotContainer {
             Commands.runOnce(
                 () -> {
                   org.littletonrobotics.junction.Logger.recordOutput("shoot/fires", true);
-                  if (m_intake.getCurrentState() != Intake.IntakeState.kIntaking) {
-                    m_intake.updateState(IntakeState.kIntaking);
+                  if (m_intake.getCurrentState() != Intake.IntakeState.kSpinning) {
+                    m_intake.updateState(IntakeState.kSpinning);
                   } else {
                     m_intake.updateState(IntakeState.kIdle);
                   }

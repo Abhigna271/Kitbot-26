@@ -1,6 +1,7 @@
-package frc.robot.subsystems.shooter;
+package frc.robot.subsystems.Kicker;
 
 import org.littletonrobotics.junction.AutoLog;
+// IO is js the blueprint, showing all the necessities of an Intake file
 
 public interface KickerIO {
   @AutoLog
@@ -12,7 +13,5 @@ public interface KickerIO {
 
   public void updateInputs(KickerInputs inputs);
 
-  public void setVoltage(double voltage);
-
-  public void setCurrentLimits(double supplyLimit);
+  public void setVoltage(double volt);
 }

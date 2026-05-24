@@ -1,7 +1,6 @@
-package frc.robot.subsystems.intake;
+package frc.robot.subsystems.Intake;
 
 import org.littletonrobotics.junction.AutoLog;
-// IO is js the blueprint, showing all the necessities of an Intake file
 
 public interface IntakeIO {
   @AutoLog
@@ -13,7 +12,9 @@ public interface IntakeIO {
 
   public void updateInputs(IntakeInputs inputs);
 
-  public void setVoltage(double volt);
+  public void setVoltage(double voltage);
+
+  public void setCurrentLimits(double supplyLimit);
 
   public void setPIDFF(double kP, double kI, double kD, double kS);
 }

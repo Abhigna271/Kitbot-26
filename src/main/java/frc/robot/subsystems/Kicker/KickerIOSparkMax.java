@@ -1,4 +1,4 @@
-package frc.robot.subsystems.shooter;
+package frc.robot.subsystems.Kicker;
 
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
@@ -21,7 +21,4 @@ public class KickerIOSparkMax implements KickerIO {
   public void setVoltage(double volt) {
     m_motor.setVoltage(volt);
   }
-
-  @Override
-  public void setCurrentLimits(double supplyLimit) {}
 }

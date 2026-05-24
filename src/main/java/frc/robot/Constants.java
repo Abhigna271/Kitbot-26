@@ -187,9 +187,11 @@ public final class Constants {
 
   public static final class IntakeConstants {
     public static final LoggedTunableNumber kIntakingVoltage =
-        new LoggedTunableNumber("Intake/intakingVoltage", 1.0);
+        new LoggedTunableNumber("Intake/intakingVoltage", 8.0);
     public static final LoggedTunableNumber kIdleVoltage =
         new LoggedTunableNumber("Intake/idleVoltage", 0.0);
+    public static final LoggedTunableNumber kSpinningVoltage =
+        new LoggedTunableNumber("Intake/SpinningVoltage", -8.0);
     public static final LoggedTunableNumber kShooterP = new LoggedTunableNumber("Shooter P", 1.0);
     public static final LoggedTunableNumber kShooterI = new LoggedTunableNumber("Shooter I", 1.0);
     public static final LoggedTunableNumber kShooterD = new LoggedTunableNumber("Shooter D", 1.0);
@@ -206,8 +208,8 @@ public final class Constants {
     public static final double kGearRatio = 10 / 82;
     public static final LoggedTunableNumber kIdleVoltage =
         new LoggedTunableNumber("ShooterIdleVoltage", 0);
-    public static final LoggedTunableNumber kSpinningVoltage =
-        new LoggedTunableNumber("SpinningIntakeVoltage", 8);
+    public static final LoggedTunableNumber kIntakingVoltage =
+        new LoggedTunableNumber("ShooterSpinningVoltage", 1);
     public static final LoggedTunableNumber kShootingVoltage =
         new LoggedTunableNumber("ShootingVoltage", -8);
     // sim
@@ -336,8 +338,8 @@ public final class Constants {
 
     public static final String kDriveCanivoreName = "Drivetrain";
 
-    public static final int kIntakePort = 12;
-    public static final int kShooterPort = 13;
+    public static final int kIntake = 12;
+    public static final int kShooter = 13;
 
     public static final String kMainCanivoreName = "Main";
     public static final String kIntakeCanivoreName = "Intake";

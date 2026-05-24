@@ -1,9 +1,9 @@
 package frc.robot;
 
-import frc.robot.subsystems.intake.Intake;
-import frc.robot.subsystems.intake.Intake.IntakeState;
-import frc.robot.subsystems.shooter.Kicker;
-import frc.robot.subsystems.shooter.Kicker.KickerState;
+import frc.robot.subsystems.Intake.Intake;
+import frc.robot.subsystems.Intake.Intake.IntakeState;
+import frc.robot.subsystems.Kicker.Kicker;
+import frc.robot.subsystems.Kicker.Kicker.KickerState;
 import frc.robot.util.SubsystemProfiles;
 import java.util.HashMap;
 import org.littletonrobotics.junction.Logger;
@@ -50,11 +50,11 @@ public class RobotState {
         m_Kicker.updateState(KickerState.kIdle);
         break;
       case kIntaking:
-        m_Intake.updateState(IntakeState.kIntaking);
-        m_Kicker.updateState(KickerState.kIdle);
+        m_Intake.updateState(IntakeState.kSpinning);
+        m_Kicker.updateState(KickerState.kIntaking);
         break;
       case kShooting:
-        m_Intake.updateState(IntakeState.kIntaking);
+        m_Intake.updateState(IntakeState.kSpinning);
         m_Kicker.updateState(KickerState.kShooting);
         break;
       default:

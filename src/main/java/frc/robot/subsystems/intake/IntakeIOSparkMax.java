@@ -1,4 +1,4 @@
-package frc.robot.subsystems.intake;
+package frc.robot.subsystems.Intake;
 
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
@@ -21,6 +21,9 @@ public class IntakeIOSparkMax implements IntakeIO {
   public void setVoltage(double volt) {
     m_motor.setVoltage(volt);
   }
+
+  @Override
+  public void setCurrentLimits(double supplyLimit) {}
 
   @Override
   public void setPIDFF(double kP, double kI, double kD, double kS) {}
